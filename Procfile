@@ -1,0 +1,1 @@
+web: sh setup.sh && streamlit run DataClean_Attempt_1.py
