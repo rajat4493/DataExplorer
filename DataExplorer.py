@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+import base64
 
 #DA Package
 import pandas as pd 
