@@ -21,7 +21,7 @@ def main():
 	
 	def file_selector():
 		#filenames=os.listdir(folder_path)		
-		selected_filename=st.file_uploader("Upload your dataset", type=None, encoding='auto', key=None)
+		selected_filename=st.file_uploader("Upload your dataset", type='.csv', encoding='auto', key=None)
 		return (selected_filename)
 	
 	filename=file_selector()
@@ -146,14 +146,20 @@ def main():
 
 	#Download the updated dataset
 	st.sidebar.subheader("Download the edited dataset")
-	if st.sidebar.button("Download"):
-		
-		df.to_csv("~//Downloads//Fileclean12.csv")
-		st.info("You file is downloaded at ~//Downloads//Fileclean1.csv")
-		#down_file(df,"CleanFile.csv")
+
+	if df.empty:
+		st.sidebar.info("Please upload a file and perform some cleaning")
+	else:
+		csv = df.to_csv(index=False)
+		b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+		st.sidebar.markdown(f'<a href="data:file/csv;base64,{b64}" download="CleanFile.csv">Download csv file</a>', unsafe_allow_html=True)
+		#st.sidebar.markdown(get_table_download_link(df), unsafe_allow_html=True)
+		hide_footer_style = """<style>.reportview-container .main footer {visibility: hidden;}"""
+		st.markdown(hide_footer_style, unsafe_allow_html=True)
 
 hide_footer_style = """<style>.reportview-container .main footer {visibility: hidden;}"""
-st.markdown(hide_footer_style, unsafe_allow_html=True)
+
+#st.markdown(hide_footer_style, unsafe_allow_html=True)
 
 if __name__ == '__main__':
 	main() 
