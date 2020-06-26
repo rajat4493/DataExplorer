@@ -68,11 +68,11 @@ def main():
 		new_df.size
 		st.dataframe(new_df)
 
-
-
 	#Show summmary
 	if st.sidebar.checkbox("Data Summary"):
 		st.write(df.describe().T)
+
+
 
 	#Data Cleaning
 	st.sidebar.subheader("Data Cleaning Options ")
@@ -95,6 +95,24 @@ def main():
 	#Show DataTypes 
 	if st.button("Show DataTypes"):
 		df.dtypes
+
+	#Remove the outliners from data
+	if st.sidebar.checkbox("Remove outliners"):
+		columns_list = df.columns.tolist()
+		default_option = "Select column for outliner"
+		columns_list = [default_option] + columns_list
+		outliner_column = st.selectbox("Select a column to remove outliners ",columns_list) 
+		if outliner_column == default_option:
+			st.info("Select a column")
+		else:
+			q1 = df[outliner_column].quantile(0.25)
+			q3 = df[outliner_column].quantile(0.75)
+			iqr = q3-q1 
+			fence_low  = q1-1.5*iqr
+			fence_high = q3+1.5*iqr
+			df = df.loc[(df[outliner_column] > fence_low) & (df[outliner_column] < fence_high)]
+			st.write(df)
+
 
 
 	#Plot and visualization
