@@ -2,6 +2,7 @@ import os
 import streamlit as st
 import base64
 
+
 #DA Package
 import pandas as pd 
 
@@ -16,9 +17,12 @@ import matplotlib
 
 def main():
 
-	html_header = """<div style = "background-color:White"><div align="center";><h1>Lazy Learner - Data Explorer</h1></div></div>"""
+
+	html_header = """<div style = "background-color:White"><div align="center";><h1>DATA UBER - Dwell in data verity</h1></div></div>"""
 	st.markdown(html_header,unsafe_allow_html=True)
+	
 	st.sidebar.title("COLUMBUS - The Explorer")
+	
 	
 	def file_selector():
 		#filenames=os.listdir(folder_path)		
@@ -26,6 +30,7 @@ def main():
 		return (selected_filename)
 	
 	filename=file_selector()
+
 
 	#Read data using Pandas
 	if not filename:
@@ -147,6 +152,11 @@ def main():
 
 	#Download the updated dataset
 	st.sidebar.subheader("Download the edited dataset")
+	#if st.sidebar.button("Download"):
+		
+	#	df.to_csv("CleanDataFile.csv")
+	#	st.info("You file is downloaded as Fileclean1.csv")
+		#down_file(df,"CleanFile.csv")
 
 	if df.empty:
 		st.sidebar.info("Please upload a file and perform some cleaning")
@@ -155,12 +165,15 @@ def main():
 		b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
 		st.sidebar.markdown(f'<a href="data:file/csv;base64,{b64}" download="CleanFile.csv">Download csv file</a>', unsafe_allow_html=True)
 		#st.sidebar.markdown(get_table_download_link(df), unsafe_allow_html=True)
-		hide_footer_style = """<style>.reportview-container .main footer {visibility: hidden;}"""
-		st.markdown(hide_footer_style, unsafe_allow_html=True)
+		
+#UX Design Update#
 
 hide_footer_style = """<style>.reportview-container .main footer {visibility: hidden;}"""
+st.markdown(hide_footer_style, unsafe_allow_html=True)
 
-#st.markdown(hide_footer_style, unsafe_allow_html=True)
+hide_streamlit_style = """<style>#MainMenu {visibility: hidden;}footer {visibility: hidden;}</style>"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
 
 if __name__ == '__main__':
 	main() 
