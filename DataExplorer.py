@@ -24,6 +24,8 @@ def main():
 	st.sidebar.title("COLUMBUS - The Explorer")
 	
 	
+
+
 	def file_selector():
 		#filenames=os.listdir(folder_path)		
 		selected_filename=st.file_uploader("Upload your dataset", type='csv', encoding='auto', key=None)
@@ -183,7 +185,14 @@ def main():
 		b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
 		st.sidebar.markdown(f'<a href="data:file/csv;base64,{b64}" download="CleanFile.csv">Download csv file</a>', unsafe_allow_html=True)
 		#st.sidebar.markdown(get_table_download_link(df), unsafe_allow_html=True)
-		
+	
+	#About App
+	st.sidebar.header("About App")
+	if st.sidebar.button("About"):
+		st.sidebar.markdown("__author__ = Rajat Pandey"+'\n\n\n'+" __copyright__ = Copyright (©) 2020 Rajat"+'\n\n\n'+"__license__ = Public Domain")
+
+
+
 #UX Design Update#
 
 hide_footer_style = """<style>.reportview-container .main footer {visibility: hidden;}"""
