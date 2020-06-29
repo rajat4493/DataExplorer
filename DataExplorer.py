@@ -99,7 +99,7 @@ def main():
 		df.dtypes
 
 	#Remove the outliners from data
-	if st.sidebar.checkbox("Remove outliners"):
+	if st.sidebar.checkbox("Remove outliers"):
 		columns_list = df.columns.tolist()
 		default_option = "Select column for outliner"
 		columns_list = [default_option] + columns_list
