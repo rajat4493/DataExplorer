@@ -28,7 +28,7 @@ def main():
 
 	def file_selector():
 		#filenames=os.listdir(folder_path)		
-		selected_filename=st.file_uploader("Upload your dataset", type='csv', encoding='auto', key=None)
+		selected_filename=st.file_uploader("Upload your dataset", type='csv', key=None)
 		return (selected_filename)
 	
 	filename=file_selector()
